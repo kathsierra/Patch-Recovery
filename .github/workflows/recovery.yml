@@ -23,6 +23,11 @@ jobs:
       - name: Télécharger l’image recovery
         run: |
           wget "${{ github.event.inputs.RECOVERY_URL }}" -O recovery.img
+      - name: Vérifier le fichier recovery.img
+        run: |
+         ls -lh recovery.img
+         file recovery.img
+         hexdump -C recovery.img | head -n 10
 
       - name: Patch Process 1
         run: |
