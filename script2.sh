@@ -28,7 +28,12 @@ cd unpack
 
 # Réintégrer le fichier patché dans l'image
 ../magiskboot cpio ramdisk.cpio 'add 0755 system/bin/recovery system/bin/recovery'
-../magiskboot repack ../recovery.img new-boot.img || exit 1
+../magiskboot repack ../recovery.img new-boot.img || { echo "❌ repack failed"; exit 1; }
 
-# Copier le résultat final
+if [ ! -f new-boot.img ]; then
+  echo "❌ new-boot.img was not created"
+  exit 1
+fi
+
 cp new-boot.img ../recovery-patched.img
+
