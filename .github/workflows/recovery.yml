@@ -18,11 +18,11 @@ jobs:
       - name: Préparer l’environnement
         run: |
           sudo apt update
-          sudo apt install -y git wget lz4 tar openssl python3
+          sudo apt install -y git wget lz4 tar openssl python3 megatools
 
       - name: Télécharger l’image recovery
         run: |
-          wget "${{ github.event.inputs.RECOVERY_URL }}" -O recovery.img
+          megadl "${{ github.event.inputs.RECOVERY_URL }}" --path recovery.img
       - name: Vérifier le fichier recovery.img
         run: |
          ls -lh recovery.img
